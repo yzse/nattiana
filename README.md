@@ -1,5 +1,5 @@
 # nattiana
-gpt-backed natural wine recommender for wine enthusiasts & alike to discover a wide range natural wines.  recommendations are sourced from a number of well-known wine blogs.  this repo contains the code and resources necessary to deploy and run the recommendation system.
+gpt-backed natural wine recommender for wine enthusiasts & alike to discover a wide range natural wines.  recommendations are sourced from a number of well-known wine blogs.  this repo contains the code and resources necessary to deploy and run the recommendation system.  like [Vivino](https://www.vivino.com/), but for natural wine and enhanced with AI.
 
 
 A. User Interaction
