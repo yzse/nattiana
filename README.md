@@ -1,33 +1,38 @@
-# nattiana
-gpt-backed natural wine recommender for wine enthusiasts & alike to discover a wide range natural wines.  recommendations are sourced from a number of well-known wine blogs.  this repo contains the code and resources necessary to deploy and run the recommendation system.  like [Vivino](https://www.vivino.com/), but for natural wine and enhanced with AI.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Getting Started
 
-A. User Interaction
-  1. User takes a photo of the wine label using the mobile device's camera
-  2. The photo is processed and sent for image classification
+First, run the development server:
 
-B. Image Classification
-  1. Utilize image classification tools or libraries (e.g., TensorFlow, PyTorch) to analyze the wine label
-  2. Extract relevant information from the label, such as the wine name, vineyard, and vintage
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-C. Querying GPT Model
-  1. Develop or find a pre-trained GPT model specifically trained on natural wine websites
-  2. Use the extracted information from the label to generate a query for the GPT model
-  3. Send the query to the GPT model and retrieve the tasting notes for the wine
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-D. Recommendation Engine
-  1. Based on the tasting notes received, develop a recommendation engine
-  2. Consider factors such as flavor profiles, region, and vintage to provide relevant wine recommendations
-  3. Store a database of natural wines and associated tasting notes for efficient retrieval
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-E. User Interface
-  1. Design a mobile-first website interface with a clean and intuitive layout
-  2. Develop a user-friendly interface for capturing and processing images
-  3. Display the tasting notes and recommendations in a visually appealing manner
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-F. Deployment
-  1. Host the website on a suitable hosting platform (e.g., Heroku, AWS)
-  2. Ensure the website is optimized for mobile devices, employing responsive design techniques
-  3. Test the website thoroughly across different mobile devices and browsers
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-built with: typescript, gpt-4, nextjs
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
