@@ -1,6 +1,6 @@
 ## nattiana
 
-a recommendation engine, work in progress
+building a gpt-backed recommendation engine, work in progress
 
 <img src="https://i.imgur.com/VcQno7v.jpeg" alt="Wine Label" width="350">
 
