@@ -2,15 +2,13 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { createWorker, Worker } from 'tesseract.js';
-// import { Button, Progress, Stack, Text, Spinner } from '@chakra-ui/react';
+// const sharp = require("sharp");
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [textResult, setTextResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  const worker = useRef<Worker | null>(null);
-
+  
   const convertImageToText = useCallback(async () => {
     if (!selectedImage) return;
     setIsLoading(true);
@@ -19,6 +17,14 @@ export default function Home() {
     await (await worker).load();
     await (await worker).loadLanguage("eng");
     await (await worker).initialize("eng");
+    await (await worker).setParameters({
+      tessedit_char_whitelist: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      preserve_interword_spaces: '0',
+    });
+
+    // sharp
+    // sharp(selectedImage).resize({ height: 1000 }).extract({ width: 300, height: 250, left: 5, top: 500 }).threshold(230).toFile(selectedImage)
+
     const { data } = await (await worker).recognize(selectedImage);
     setTextResult(data.text);
     setIsLoading(false);
