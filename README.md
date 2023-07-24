@@ -1,6 +1,6 @@
 ## nattiana
 
-mobile/web-based recommendation engine with OCR capabilities
+web-based recommendation engine with OCR capabilities
 
 <img src="https://i.imgur.com/VcQno7v.jpeg" alt="Wine Label" width="350">
 
