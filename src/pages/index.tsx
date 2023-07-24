@@ -1,13 +1,12 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { Button, Progress, Stack, Text, Spinner } from '@chakra-ui/react';
 import { createWorker, Worker } from 'tesseract.js';
-
+// import { Button, Progress, Stack, Text, Spinner } from '@chakra-ui/react';
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [textResult, setTextResult] = useState("");
+  const [textResult, setTextResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const worker = useRef<Worker | null>(null);
@@ -22,7 +21,6 @@ export default function Home() {
     await (await worker).initialize("eng");
     const { data } = await (await worker).recognize(selectedImage);
     setTextResult(data.text);
-
     setIsLoading(false);
   }, [selectedImage]);
 
@@ -36,10 +34,9 @@ export default function Home() {
       setSelectedImage(files[0]);
     } else {
       setSelectedImage(null);
-      setTextResult("");
+      setTextResult('');
     }
-  }
-
+  };
 
   return (
     <div className={styles.container}>
@@ -50,16 +47,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          nattiana
-        </h1>
+        <h1 className={styles.title}>nattiana</h1>
 
         <br />
 
         <div className={styles.description}>
-          <p>
-            ai natural wine recommender
-          </p>
+          <p>ai natural wine recommender</p>
         </div>
 
         <div className={styles.grid}>
@@ -90,9 +83,7 @@ export default function Home() {
             </div>
           ) : null}
         </div>
-
-
       </main>
     </div>
-  )
+  );
 }
