@@ -155,3 +155,17 @@
   font-family: 'New Yorker Italic';
   src: url('../../font/ACaslonPro-Italic.otf') format('truetype');
 }
+
+.selectedImage {
+  width: 100%; /* Full width on smaller screens */
+  max-width: 200px; /* Maximum width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 20px; /* Rounded corners */
+}
+
+@media (min-width: 768px) {
+  /* Adjustments for larger screens, e.g., tablets and desktops */
+  .selectedImage {
+    max-width: 280px;
+  }
+}
