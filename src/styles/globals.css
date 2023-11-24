@@ -4,7 +4,7 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
+  --background-start-rgb: 60, 0, 0;
   --background-end-rgb: 0, 0, 0;
 }
 
@@ -24,4 +24,13 @@ body {
     rgb(var(--background-end-rgb))
   )
     rgb(var(--background-start-rgb));
+}
+
+.button {
+  padding: 3ch 20px;
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 16px;
 }

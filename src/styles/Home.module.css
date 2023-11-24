@@ -48,13 +48,13 @@
   line-height: 1.15;
   font-size: 3rem;
   font-family: Arial, Helvetica, sans-serif;
-  font-family: 'New Yorker Regular', Arial, Helvetica, sans-serif;
+  font-family: 'New Yorker Bold', Arial, Helvetica, sans-serif;
 }
 
 .title,
 .description {
   text-align: center;
-  font-family: 'New Yorker Regular', Arial, Helvetica, sans-serif;
+  font-family: 'New Yorker Bold', Arial, Helvetica, sans-serif;
   
 }
 
@@ -87,13 +87,14 @@
 .card {
   margin: 1rem;
   padding: 0.8rem;
-  text-align: left;
+  text-align: center;
   color: inherit;
   text-decoration: none;
   border: px solid #eaeaea;
   border-radius: 15px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  font-family: 'New Yorker Regular', Arial, Helvetica, sans-serif;
+  max-width: 60%;
 }
 
 .card:hover,
@@ -123,7 +124,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #000000;
+  background-color: #fafafa;
   animation: fade 1.6s ease-in-out infinite;
 }
 
@@ -156,6 +157,11 @@
   src: url('../../font/ACaslonPro-Italic.otf') format('truetype');
 }
 
+@font-face {
+  font-family: 'New Yorker Bold';
+  src: url('../../font/ACaslonPro-Bold.ttf') format('truetype');
+}
+
 .selectedImage {
   width: 100%; /* Full width on smaller screens */
   max-width: 200px; /* Maximum width */
@@ -166,6 +172,6 @@
 @media (min-width: 768px) {
   /* Adjustments for larger screens, e.g., tablets and desktops */
   .selectedImage {
-    max-width: 280px;
+    max-width: 20px;
   }
 }

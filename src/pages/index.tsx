@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import React, { useState } from 'react';
-import OpenAI from 'openai';
+import { json } from 'stream/consumers';
+// import OpenAI from 'openai';
 
-const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
+// const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -21,13 +22,10 @@ export default function Home() {
 
   // convert image to url
   const handleUploadImage = async () => {
-    console.log("running!");
     if (!selectedImage) {
       console.log("No image selected");
       return;
     }
-
-    console.log("selectedImage2", selectedImage);
 
     setIsLoading(true);
 
@@ -35,41 +33,23 @@ export default function Home() {
     reader.readAsDataURL(selectedImage);
     reader.onloadend = async () => {
       const base64Image = reader.result?.toString();
-
-      if (!base64Image) {
-        console.log("Failed to convert image to Base64");
-        setIsLoading(false);
-        return;
-      }
-
       try {
-        const response = await openai.chat.completions.create({
-          model: "gpt-4-vision-preview",
-          messages: [
-            {
-              role: "system",
-              content: "Here's a photo of a wine label. Roast the person having this wine. Sound like a sassy sommelier in brooklyn, new york. Make it fun, maybe even a little rude, end with a haiku. Keep it as 500 characters or less.",
-            },
-            {
-              role: "user",
-              content: [
-                {
-                  type: "image_url",
-                  image_url: {
-                    url: base64Image,
-                  }
-                }
-              ]
-            },
-          ],
-          max_tokens: 4096,
-        });
+        console.log('starting fetch...')
 
-        console.log("GPT RESPONSE", response.choices[0]);
-        setGptResponse(response.choices[0].message.content);
+        const response = await fetch('/api/openai', {
+          method: 'POST',
+          body: JSON.stringify({ image: base64Image }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+
+        console.log('fetch complete')
+        setGptResponse(await response.text());
+        console.log('response set')
 
       } catch (error) {
-        console.error("Error calling OpenAI:", error);
+        console.error("Error:", error);
       } finally {
         setIsLoading(false);
       }
@@ -80,21 +60,21 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>nattiana</title>
+        <title>Nattiana</title>
         <meta name="description" content="nattiana" />
         <link rel="icon" href="../favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>nattiana</h1>
+        <h1 className={styles.title}>Nattiana</h1>
 
         <div className={styles.description}>
-          <p>roast your wine taste</p>
+          <p>Roast your wine taste.</p>
         </div>
 
         <div className={styles.grid}>
           <label htmlFor="capture" className="photo">
-            <p>scan wine label &rarr;</p>
+            <p>Scan wine label &rarr;</p>
             <input
               className={styles.hiddenInput}
               type="file"
@@ -106,14 +86,10 @@ export default function Home() {
             />
           </label>
         </div>
-        
-
-        <br />
-        <br />
 
        {/* display image */}
         <div>
-          <br />
+        <br />
           {selectedImage && (
             <img 
               src={URL.createObjectURL(selectedImage)} 
@@ -124,19 +100,16 @@ export default function Home() {
         </div>
 
         {/* display button only after image is shown*/}
-        <div className={styles.grid}>
-          <br />
-          <br />
-          <br />
+        <div className={styles.description}>
           {selectedImage && (
             <button onClick={handleUploadImage} disabled={isLoading}>
-              {isLoading ? (<div className={styles.loadingDot}></div>) : ("roast") }
+              {isLoading ? (<div className={styles.loadingDot}></div>) : ("🍷") }
             </button>
           )}
         </div>
 
-        {/* print gpt response */}
-        <div className={styles.description}>
+        {/* print gpt response*/}
+        <div className={styles.card}>
           {gptResponse && (
             <p>{gptResponse}</p>
           )}
