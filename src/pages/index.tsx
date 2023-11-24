@@ -15,39 +15,88 @@ export default function Home() {
       return;
     }
 
+    // displays image
     setSelectedImage(files[0]);
     setIsLoading(true);
 
-    const reader = new FileReader();
-    reader.readAsDataURL(files[0]); // Use the selected file directly
-    reader.onloadend = async () => {
-      const base64Image = reader.result?.toString();
+    const formData = new FormData();
+    formData.append('file', files[0]);
 
-      if (!base64Image) {
-        console.log("Failed to convert image to Base64");
-        setIsLoading(false);
+    // sends to aws
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@FORM DATA:', formData);
+
+    try {
+      const img_response = await fetch('/api/aws', {
+        method: 'POST',
+        body: formData
+      });
+
+      // get image url from aws - this should be a url string that gets sent to gpt
+      const { imageUrl } = await img_response.json();
+      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@img_response:', img_response);
+
+      // send image url to gpt
+      const response = await fetch('/api/openai', {
+        method: 'POST',
+        body: JSON.stringify({ image: imageUrl }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      // clean up response string
+      let responseText = await response.text();
+      responseText = responseText.replace(/\"/g, '');
+      setGptResponse(responseText);
+
+    } catch (error) {
+      console.error("Error:", error);
+
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const regenerateResponse = async () => {
+      if (!selectedImage) {
+        console.log("No image selected");
         return;
       }
+  
+      setIsLoading(true);
+  
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedImage);
+      reader.onloadend = async () => {
+        // convert image to base64
+        const base64Image = reader.result?.toString();
+  
+        try {
+          console.log('starting fetch...')
+  
+          const response = await fetch('/api/openai', {
+            method: 'POST',
+            body: JSON.stringify({ image: base64Image }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+  
+          console.log('fetch complete')
+          let responseText = await response.text();
+          responseText = responseText.replace(/\"/g, '');
+          setGptResponse(await responseText);
+          console.log('response set')
+  
+        } catch (error) {
+          console.error("Error:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+  }
 
-      try {
-        const response = await fetch('/api/openai', {
-          method: 'POST',
-          body: JSON.stringify({ image: base64Image }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
 
-        let responseText = await response.text();
-        responseText = responseText.replace(/\"/g, ''); // Remove double quotes
-        setGptResponse(responseText);
-      } catch (error) {
-        console.error("Error:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-  };
 
   return (
     <div className={styles.container}>
@@ -59,14 +108,12 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Nattiana</h1>
-
-        <div className={styles.description}>
-          <p>Roast your wine taste.</p>
-        </div>
+        {/* <h2 className={styles.description}>Roast your wine taste.</h2> */}
+        <h2 className={styles.description}> /// .</h2>
 
         <div className={styles.grid}>
           <label htmlFor="capture" className="photo">
-            <p>Scan wine label &rarr;</p>
+            <p>Scan label &rarr;</p>
             <input
               className={styles.hiddenInput}
               type="file"
@@ -80,8 +127,8 @@ export default function Home() {
         </div>
 
        {/* display image */}
-        <div>
-        <br />
+        <div className={styles.grid}>
+          <br />
           {selectedImage && (
             <img 
               src={URL.createObjectURL(selectedImage)} 
@@ -102,6 +149,15 @@ export default function Home() {
             <p>{gptResponse}</p>
           )}
         </div>
+
+        {/* Regenerate response - only show if gptResponse is loaded */}
+        {gptResponse && (
+          <div className={styles.description}>
+            <button onClick={regenerateResponse} disabled={isLoading}>
+              🍷
+            </button>
+          </div>
+        )}
 
       </main>
     </div>

@@ -27,6 +27,7 @@
     "aws-sdk": "^2.1502.0",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
+    "formidable-serverless": "^1.1.1",
     "framer-motion": "^10.12.17",
     "fs": "^0.0.1-security",
     "jscanify": "^1.2.0",
