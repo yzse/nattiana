@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [gptResponse, setGptResponse] = useState<string | null>(null);
 
@@ -28,9 +29,11 @@ export default function Home() {
         body: formData
       });
 
-      // get image url from aws - this should be a url string that gets sent to gpt
-      const { imageUrl } = await img_response.json();
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@img_response:', img_response);
+      const responseData = await img_response.json();
+      const imageUrl = responseData.url;
+      setImageUrl(imageUrl);
+
+      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@imageUrl:', imageUrl);
 
       // send image url to gpt
       const response = await fetch('/api/openai', {
@@ -55,42 +58,29 @@ export default function Home() {
   }
 
   const regenerateResponse = async () => {
-      if (!selectedImage) {
-        console.log("No image selected");
+      if (!imageUrl) {
+        console.log("No image URL available");
         return;
       }
   
       setIsLoading(true);
-  
-      const reader = new FileReader();
-      reader.readAsDataURL(selectedImage);
-      reader.onloadend = async () => {
-        // convert image to base64
-        const base64Image = reader.result?.toString();
-  
-        try {
-          console.log('starting fetch...')
-  
-          const response = await fetch('/api/openai', {
-            method: 'POST',
-            body: JSON.stringify({ image: base64Image }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-  
-          console.log('fetch complete')
-          let responseText = await response.text();
-          responseText = responseText.replace(/\"/g, '');
-          setGptResponse(await responseText);
-          console.log('response set')
-  
-        } catch (error) {
-          console.error("Error:", error);
-        } finally {
-          setIsLoading(false);
+
+      // get another response from gpt with the same image
+      const response = await fetch('/api/openai', {
+        method: 'POST',
+        body: JSON.stringify({ image: imageUrl }),
+        headers: {
+          'Content-Type': 'application/json'
         }
-      };
+      });
+
+      // clean up response string
+      let responseText = await response.text();
+      responseText = responseText.replace(/\"/g, '');
+      setGptResponse(responseText);
+
+      setIsLoading(false);
+    
   }
 
 

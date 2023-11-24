@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 export default async function handler(req, res) {
     if (req.method === 'POST') {
         const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY });
-        const { imageUrl } = req.body;
+        const { image: imageUrl } = req.body;
         // convert base64Image to url
         
         // api call
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
                 {
                 type: "image_url",
                 image_url: {
-                    url: imageUrl,
+                    url: imageUrl
                 }
                 }
             ]
