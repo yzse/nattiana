@@ -1,53 +1,46 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import React, { useState } from 'react';
-import { json } from 'stream/consumers';
-// import OpenAI from 'openai';
-
-// const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY , dangerouslyAllowBrowser: true});
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [gptResponse, setGptResponse] = useState<string | null>(null);
 
-  const showImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const showImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
-    if (files && files[0]) {
-      setSelectedImage(files[0]);
-    } else {
-      setSelectedImage(null);
-    }
-  };
-
-  // convert image to url
-  const handleUploadImage = async () => {
-    if (!selectedImage) {
+    if (!files || !files[0]) {
       console.log("No image selected");
+      setSelectedImage(null);
       return;
     }
 
+    setSelectedImage(files[0]);
     setIsLoading(true);
 
     const reader = new FileReader();
-    reader.readAsDataURL(selectedImage);
+    reader.readAsDataURL(files[0]); // Use the selected file directly
     reader.onloadend = async () => {
       const base64Image = reader.result?.toString();
-      try {
-        console.log('starting fetch...')
 
+      if (!base64Image) {
+        console.log("Failed to convert image to Base64");
+        setIsLoading(false);
+        return;
+      }
+
+      try {
         const response = await fetch('/api/openai', {
           method: 'POST',
           body: JSON.stringify({ image: base64Image }),
           headers: {
             'Content-Type': 'application/json'
           }
-        })
+        });
 
-        console.log('fetch complete')
-        setGptResponse(await response.text());
-        console.log('response set')
-
+        let responseText = await response.text();
+        responseText = responseText.replace(/\"/g, ''); // Remove double quotes
+        setGptResponse(responseText);
       } catch (error) {
         console.error("Error:", error);
       } finally {
@@ -55,7 +48,6 @@ export default function Home() {
       }
     };
   };
-
 
   return (
     <div className={styles.container}>
@@ -101,11 +93,7 @@ export default function Home() {
 
         {/* display button only after image is shown*/}
         <div className={styles.description}>
-          {selectedImage && (
-            <button onClick={handleUploadImage} disabled={isLoading}>
-              {isLoading ? (<div className={styles.loadingDot}></div>) : ("🍷") }
-            </button>
-          )}
+          {isLoading && <div className={styles.loadingDot}></div>}
         </div>
 
         {/* print gpt response*/}

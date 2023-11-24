@@ -3,14 +3,15 @@ import OpenAI from 'openai';
 export default async function handler(req, res) {
     const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY });
     const { base64Image } = req.body;
-
+    // convert base64Image to url
+    
     // api call
     const response = await openai.chat.completions.create({
     model: "gpt-4-vision-preview",
     messages: [
         {
         role: "system",
-        content: "Here's a photo of a wine label. Roast the person having this wine. Sound like a sassy sommelier in brooklyn, new york. Make it fun, maybe even a little rude, end with a haiku. Keep it about 500 characters",
+        content: "Here's a photo of a wine label. Roast the person having this wine. Sound like a sassy sommelier in brooklyn, new york. Make it fun, maybe even a little rude. Keep it about 500 characters",
         },
         {
         role: "user",
@@ -18,7 +19,7 @@ export default async function handler(req, res) {
             {
             type: "image_url",
             image_url: {
-                url: "https://heartsbushwick.com/cdn/shop/products/image_81c027a4-6a42-4e2c-9a67-12a3e09ce295_3024x.jpg?v=1614552627",
+                url: "https://heartsbushwick.com/cdn/shop/products/image_81c027a4-6a42-4e2c-9a67-12a3e09ce295_1024x1024@2x.jpg?v=1614552627",
             }
             }
         ]
