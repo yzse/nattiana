@@ -22,9 +22,6 @@ export default function Home() {
     const formData = new FormData();
     formData.append('file', files[0]);
 
-    // sends to aws
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@FORM DATA:', formData);
-
     try {
       const img_response = await fetch('/api/aws', {
         method: 'POST',
