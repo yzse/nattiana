@@ -33,8 +33,6 @@ export default function Home() {
       const imageUrl = responseData.url;
       setImageUrl(imageUrl);
 
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@imageUrl:', imageUrl);
-
       // send image url to gpt
       const response = await fetch('/api/openai', {
         method: 'POST',

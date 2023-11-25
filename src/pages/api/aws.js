@@ -20,7 +20,7 @@ const s3 = new AWS.S3({
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const form = new formidable.IncomingForm();
-    
+
     form.parse(req, (err, fields, files) => {
 
       if (err) {
@@ -45,8 +45,6 @@ export default async function handler(req, res) {
         if (s3Err) {
             return res.status(500).json({ error: 'Error uploading to S3' });
         }
-
-        console.log(`@@@@@@@@@@@@File uploaded successfully at ${data.Location}`);
 
         res.status(200).json({ url: data.Location });
         

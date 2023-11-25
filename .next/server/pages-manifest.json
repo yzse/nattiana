@@ -1,8 +1,6 @@
 {
+  "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/_app": "pages/_app.js",
-  "/api/openai": "pages/api/openai.js",
-  "/": "pages/index.js",
-  "/api/aws": "pages/api/aws.js"
+  "/": "pages/index.js"
 }
