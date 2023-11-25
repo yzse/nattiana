@@ -19,7 +19,6 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mantine/core": "^6.0.14",
-    "@next/swc-darwin-x64": "^12.3.4",
     "@techstark/opencv-js": "^4.8.0-release.2",
     "@types/node": "20.3.1",
     "@types/react": "18.2.13",
