@@ -94,9 +94,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Nattiana</h1>
+        <h1 className={styles.title}>Nattiana.</h1>
         {/* <h2 className={styles.description}>Roast your wine taste.</h2> */}
-        <h2 className={styles.description}> /// .</h2>
+        <h2 className={styles.description}>  </h2>
 
         <div className={styles.grid}>
           <label htmlFor="capture" className="photo">
@@ -127,6 +127,7 @@ export default function Home() {
 
         {/* display button only after image is shown*/}
         <div className={styles.description}>
+          <br />
           {isLoading && <div className={styles.loadingDot}></div>}
         </div>
 
