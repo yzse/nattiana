@@ -76,11 +76,8 @@ export default function Home() {
       let responseText = await response.text();
       responseText = responseText.replace(/\"/g, '');
       setGptResponse(responseText);
-
       setIsLoading(false);
-    
   }
-
 
 
   return (
@@ -124,19 +121,17 @@ export default function Home() {
 
         {/* display button only after image is shown*/}
         <div className={styles.description}>
-          <br />
           {isLoading && <div className={styles.loadingDot}></div>}
         </div>
 
         {/* print gpt response*/}
-        {/* add typewriter animation */}
-        <div className={styles.card}>
+        <div className={styles.type}>
           {gptResponse && (
             <p>{gptResponse}</p>
           )}
         </div>
 
-        {/* Regenerate response - only show if gptResponse is loaded */}
+        {/* regenerate response - only show if gptResponse is loaded */}
         {gptResponse && (
           <div className={styles.description}>
             <button onClick={regenerateResponse} disabled={isLoading}>

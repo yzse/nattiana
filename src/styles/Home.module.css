@@ -49,7 +49,23 @@
   font-size: 3rem;
   font-family: Arial, Helvetica, sans-serif;
   font-family: 'New Yorker Bold', Arial, Helvetica, sans-serif;
+  /* add typewriter animation */
+  /* Typewriter effect */
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  white-space: nowrap; /* Keeps the content on a single line */
+  /* letter-spacing: .15em; Adjusts the space between letters */
+  animation: typing_title 0.7s steps(50, end);
+  /* Adjust the width to fit your text and desired effect */
+  max-width: 20ch; /* Change as per the length of your text */
 }
+
+/* Typewriter typing effect */
+@keyframes typing_title {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+
 
 .title,
 .description {
@@ -87,6 +103,20 @@
   text-decoration: underline;
 }
 
+.type {
+  font-family: monospace;
+  font-weight: 500;
+  color: inherit;
+  font-size: medium;
+  padding-left: 8%;
+  padding-right: 8%;
+  padding-bottom: 6%;
+  text-align: justify;
+  box-sizing: border-box;
+  width: fit-content; 
+}
+
+
 .card {
   margin: 1em auto;
   padding: 1.5rem;
@@ -94,33 +124,8 @@
   color: inherit;
   font-family: 'New Yorker Regular', Arial, Helvetica, sans-serif;
   font-size: 1rem;
-  border-right: 1px solid black;
   box-sizing: border-box;
   width: fit-content; 
-
-  overflow: hidden;
-  animation: typing 3.5s, 
-            cursor 0.75s step-end infinite alternate;
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes cursor {
-  from { border-right-color: black; }
-  to { border-right-color: transparent; }
-}
-
-
-
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #ffffff;
-  border-color: #ffffff;
 }
 
 .card h2 {
@@ -140,10 +145,12 @@
 }
 
 .loadingDot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
+  padding: 50%;
+  margin: 0.5em auto;
   border-radius: 50%;
-  background-color: #fafafa;
+  background-color: #939393;
   animation: fade 1.6s ease-in-out infinite;
 }
 
