@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         messages: [
             {
             role: "system",
-            content: "Here's a photo of a wine label. Roast the person having this wine. Mention the wine name in your response. Sound like a sassy sommelier in brooklyn, new york. Make it fun, maybe even a little rude. Keep it about 500 characters",
+            content: process.env.NEXT_PUBLIC_PROMPT,
             },
             {
             role: "user",
