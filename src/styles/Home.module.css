@@ -66,6 +66,8 @@
   font-family: 'New Yorker Regular', Arial, Helvetica, sans-serif;
 }
 
+
+
 .code {
   background: #fafafa;
   border-radius: 5px;
@@ -86,25 +88,39 @@
 }
 
 .card {
-  margin: 1em auto; /* Remove margin to fit the screen width */
-  padding: 1.5rem; /* Adjust padding as needed */
-  text-align: justify; /* Justify the text */
+  margin: 1em auto;
+  padding: 1.5rem;
+  text-align: justify;
   color: inherit;
-  transition: color 0.15s ease, border-color 0.15s ease;
   font-family: 'New Yorker Regular', Arial, Helvetica, sans-serif;
-  font-size: 0rem; /* Increase font size */
-  width: 100%; /* Set width to 100% of the container 
-  */
+  font-size: 1rem;
+  border-right: 1px solid black;
   box-sizing: border-box;
+  width: fit-content; 
+
+  overflow: hidden;
+  animation: typing 3.5s, 
+            cursor 0.75s step-end infinite alternate;
 }
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes cursor {
+  from { border-right-color: black; }
+  to { border-right-color: transparent; }
+}
+
 
 
 
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #ffffff;
+  border-color: #ffffff;
 }
 
 .card h2 {

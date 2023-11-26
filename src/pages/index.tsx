@@ -93,12 +93,11 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Nattiana.</h1>
-        {/* <h2 className={styles.description}>Roast your wine taste.</h2> */}
         <h2 className={styles.description}>  </h2>
 
         <div className={styles.grid}>
           <label htmlFor="capture" className="photo">
-            <p>Scan label &rarr;</p>
+            <p>Scan drink label &rarr;</p>
             <input
               className={styles.hiddenInput}
               type="file"
@@ -130,6 +129,7 @@ export default function Home() {
         </div>
 
         {/* print gpt response*/}
+        {/* add typewriter animation */}
         <div className={styles.card}>
           {gptResponse && (
             <p>{gptResponse}</p>
