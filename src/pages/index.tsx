@@ -134,9 +134,7 @@ export default function Home() {
         {/* regenerate response - only show if gptResponse is loaded */}
         {gptResponse && (
           <div className={styles.description}>
-            <button onClick={regenerateResponse} disabled={isLoading}>
-              🍷
-            </button>
+            <img src="https://i.imgur.com/PTmtsWg.png" width="30" height="30" onClick={regenerateResponse}></img>
           </div>
         )}
 
