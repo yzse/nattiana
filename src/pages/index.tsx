@@ -21,9 +21,8 @@ export default function Home() {
     }
   }, []);
 
-
   const config = {
-    quality: 0.5,
+    quality: 0.4,
     maxWidth: 800,
     maxHeight: 600,
     autoRotate: true,
@@ -85,11 +84,7 @@ export default function Home() {
   }
 
   const regenerateResponse = async () => {
-      if (!imageUrl) {
-        console.log("No image URL available");
-        return;
-      }
-  
+      setGptResponse(null);
       setIsLoading(true);
 
       // get another response from gpt with the same image
@@ -162,12 +157,11 @@ export default function Home() {
 
         {/* regenerate response - only show if gptResponse is loaded */}
         {gptResponse && (
-          <div className={styles.description}>
-            <img src="https://i.imgur.com/PTmtsWg.png" width="30" height="30"></img>
-          </div>
+        <div className={styles.description}>
+          <img src="https://i.imgur.com/PTmtsWg.png" width="25" height="25"></img>
+        </div>
         )}
         
-
 
       </main>
     </div>
