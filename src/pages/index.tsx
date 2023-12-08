@@ -125,18 +125,20 @@ export default function Home() {
         </div>
 
         {/* print gpt response*/}
-        <div className={styles.type}>
-          {gptResponse && (
-            <p>{gptResponse}</p>
-          )}
+        {gptResponse && (
+        <div className={`${styles.typewriter} ${styles.monospace}`}>
+          <p>{gptResponse}</p>
         </div>
+        )}  
 
         {/* regenerate response - only show if gptResponse is loaded */}
         {gptResponse && (
           <div className={styles.description}>
-            <img src="https://i.imgur.com/PTmtsWg.png" width="30" height="30" onClick={regenerateResponse}></img>
+            <img src="https://i.imgur.com/PTmtsWg.png" width="30" height="30"></img>
           </div>
         )}
+        
+
 
       </main>
     </div>
