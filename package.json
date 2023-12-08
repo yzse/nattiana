@@ -25,6 +25,7 @@
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
     "aws-sdk": "^2.1502.0",
+    "browser-image-resizer": "^2.4.1",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "formidable-serverless": "^1.1.1",

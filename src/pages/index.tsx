@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
+import { readAndCompressImage as readAndCompressImageType } from 'browser-image-resizer';
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -8,21 +9,49 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [gptResponse, setGptResponse] = useState<string | null>(null);
 
+  let readAndCompressImage: typeof readAndCompressImageType;
+
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Dynamically import the browser-image-resizer library
+      import('browser-image-resizer').then((module) => {
+        readAndCompressImage = module.readAndCompressImage;
+      });
+    }
+  }, []);
+
+
+  const config = {
+    quality: 0.5,
+    maxWidth: 800,
+    maxHeight: 600,
+    autoRotate: true,
+    debug: true,
+  };
+
   const showImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
-    if (!files || !files[0]) {
-      console.log("No image selected");
+    if (!files || !files[0] || !readAndCompressImage) {
+      console.log("No image selected or resizer not loaded");
       setSelectedImage(null);
       return;
     }
 
-    // displays image
-    setSelectedImage(files[0]);
+    // resize image
+    const resizedImageBlob = await readAndCompressImage(files[0], config);
+    const resizedImageFile = new File([resizedImageBlob], files[0].name, {
+      type: resizedImageBlob.type,
+      lastModified: Date.now(),
+    });
+
+    // setSelectedImage(files[0]);
+    setSelectedImage(resizedImageFile);
     setIsLoading(true);
-
+    
     const formData = new FormData();
-    formData.append('file', files[0]);
-
+    formData.append('file', resizedImageFile);
+    
     try {
       const img_response = await fetch('/api/aws', {
         method: 'POST',
