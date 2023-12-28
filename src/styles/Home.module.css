@@ -121,7 +121,7 @@
 
 @keyframes caret {
   0% { border-color: transparent; }
-  50% { border-color: black; }
+  50% { border-color: transparent; }
   100% { border-color: transparent; }
 }
 
@@ -152,7 +152,7 @@
     carriageReturn var(--time) steps(var(--lines)) var(--lines),
     caret 2.0s steps(5);
   background: var(--bgColor);
-  border-left: 10px solid;
+  /* border-left: 10px solid; */
   bottom: 0;
   height: var(--lineHeight);
   position: absolute;
@@ -160,13 +160,52 @@
   width: var(--lineHeight);
 }
 
-/* .typewriter.no-caret::before {
-  border-left-width: 0;
+.typewriterRes {
+  --bgColor: #f1efee;
+  --lines: 500;
+  --lineHeight: 1.7rem;
+  --timePerLine: 1.25s;
+  --widthCh: 40;
+  --width: calc(var(--widthCh) * 1ch);
+  --time: calc(var(--lines) * var(--timePerLine));
+  animation: grow var(--time) steps(var(--lines)) forwards;
+  animation-fill-mode: forwards;
+  background: var(--bgColor);  
+  line-height: var(--lineHeight);
+  max-height: var(--lineHeight);
+  overflow: hidden;
+  position: relative;
+  width: var(--width);
+  text-align: right;
+  font-size: 0.8rem;
 }
 
-.typewriter.big-caret::before {
-  border-left-width: 10ch;
-} */
+.typewriterRes::before {
+  content: "";
+  animation: 
+    type var(--timePerLine) linear, 
+    carriageReturn var(--time) steps(var(--lines)) var(--lines);
+    /* caret 2.0s steps(5); */
+  background: var(--bgColor);
+  /* border-left: 10px solid; */
+  bottom: 0;
+  height: var(--lineHeight);
+  position: absolute;
+  right: 0;
+  width: var(--lineHeight);
+}
+
+.typewriterRes.monospace {
+  font-family: monospace, monospace;
+}
+
+.typewriterRes.monospace::before {
+  animation: 
+    type var(--timePerLine) steps(var(--widthCh)) infinite, 
+    carriageReturn var(--time) steps(var(--lines)) var(--lines);
+    /* caret 2.0s steps(5); */
+}
+
 
 .typewriter.monospace {
   font-family: monospace, monospace;
@@ -256,6 +295,8 @@
   max-width: 200px; /* Maximum width */
   height: auto; /* Maintain aspect ratio */
   border-radius: 20px; /* Rounded corners */
+  /* shadow */
+  /* box-shadow: 1px 3px 3px 1px rgba(0,0,0,0.1); */
 }
 
 @media (min-width: 768px) {
@@ -263,4 +304,30 @@
   .selectedImage {
     max-width: 20px;
   }
+}
+
+/* Add styles for the options container */
+.options {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Style for the buttons */
+.options button {
+  background-color: white; /* Blue background */
+  color: black;             /* White text */
+  border: none;             /* No border */
+  padding: 10px 15px;       /* Padding around text */
+  margin: 5px;              /* Margin around buttons */
+  border-radius: 5px;       /* Rounded corners */
+  cursor: pointer;          /* Pointer cursor on hover */
+  font-size: 0.8em;           /* Font size */
+  font-family: monospace, monospace;
+  /* add shadow */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+}
+
+/* Change background color on hover */
+.options button:hover {
+  background-color: lightgray; /* Darker blue background on hover */
 }

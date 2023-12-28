@@ -4,7 +4,8 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY });
         const { image: imageUrl } = req.body;
-        // convert base64Image to url
+
+        // initiate msg list
         
         // api call
         const response = await openai.chat.completions.create({
@@ -12,7 +13,7 @@ export default async function handler(req, res) {
         messages: [
             {
             role: "system",
-            content: process.env.NEXT_PUBLIC_PROMPT,
+            content: process.env.NEXT_PUBLIC_PROMPT_2,
             },
             {
             role: "user",
