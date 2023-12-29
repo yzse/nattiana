@@ -93,15 +93,21 @@ export default function Home() {
    
     switch (nextStep) {
       case 1:
-        setShowInteraction2(true); // tell me, are you actually enjoying it or just trying to look cool?
-        setShowOptionsForInteraction2(true); // obsessed with it, actually. / just trying to be real.
+        setTimeout(() => {
+          setShowInteraction2(true); 
+        }, 1200);
+        setShowOptionsForInteraction2(true); 
         break;
       case 2:
-        setShowInteraction3(true); // So you’re a {parsedData?.category} person. Shocking. How's that working out for you?
+        setTimeout(() => {
+          setShowInteraction3(true); 
+        }, 1200);
         setShowOptionsForInteraction3(true); // on top of the world! / let's not go there.
         break;
       case 3:
-        setShowInteraction4(true); // Let's keep that between us.
+        setTimeout(() => {
+          setShowInteraction4(true); // Let's keep that between us.
+        }, 1200);
         break;
       default:
         break;
@@ -127,11 +133,11 @@ export default function Home() {
       setTimeout(() => {
         setShowGuessMessage(true);
         setShowInteraction6(true);
-      }, 4500);
+      }, 3500);
     
       setTimeout(() => {
         setShowBulletPoint(true);
-      }, 8000);
+      }, 7000);
 
       setTimeout(() => {
         setShowOptionsForInteraction5(true);
