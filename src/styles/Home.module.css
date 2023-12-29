@@ -50,17 +50,12 @@
   font-size: 3rem;
   font-family: Arial, Helvetica, sans-serif;
   font-family: 'New Yorker Bold', Arial, Helvetica, sans-serif;
-  /* add typewriter animation */
-  /* Typewriter effect */
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  white-space: nowrap; /* Keeps the content on a single line */
-  /* letter-spacing: .15em; Adjusts the space between letters */
+  overflow: hidden; 
+  white-space: nowrap; 
   animation: typing_title 0.7s steps(50, end);
-  /* Adjust the width to fit your text and desired effect */
-  max-width: 20ch; /* Change as per the length of your text */
+  max-width: 20ch; 
 }
 
-/* Typewriter typing effect */
 @keyframes typing_title {
   from { width: 0; }
   to { width: 100%; }
@@ -137,7 +132,6 @@
 
 .typewriter {
   --bgColor: #f1efee;
-  /* --bgColor: ; */
   --lines: 500;
   --lineHeight: 2rem;
   --timePerLine: 1.25s;
@@ -163,7 +157,6 @@
     carriageReturn var(--time) steps(var(--lines)) var(--lines),
     caret 2.0s steps(5);
   background: var(--bgColor);
-  /* border-left: 10px solid; */
   bottom: 0;
   height: var(--lineHeight);
   position: absolute;
@@ -173,14 +166,9 @@
 
 .typewriterRes {
   --bgColor: #f1efee;
-  /* --lines: 500; */
   --lineHeight: 2rem;
-  /* --timePerLine: 1.25s; */
   --widthCh: 40;
   --width: calc(var(--widthCh) * 1ch);
-  /* --time: calc(var(--lines) * var(--timePerLine)); */
-  /* animation: grow var(--time) steps(var(--lines)) forwards;
-  animation-fill-mode: forwards; */
   background: var(--bgColor);  
   line-height: var(--lineHeight);
   max-height: var(--lineHeight);
@@ -189,7 +177,6 @@
   width: var(--width);
   text-align: right;
   font-size: 0.8rem;
-  /* bold */
   font-weight: bold;
 }
 
@@ -282,43 +269,36 @@
 }
 
 .selectedImage {
-  width: 100%; /* Full width on smaller screens */
-  max-width: 200px; /* Maximum width */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 20px; /* Rounded corners */
-  /* shadow */
-  /* box-shadow: 1px 3px 3px 1px rgba(0,0,0,0.1); */
+  width: 100%; 
+  max-width: 200px; 
+  height: auto; 
+  border-radius: 20px; 
 }
 
 @media (min-width: 768px) {
-  /* Adjustments for larger screens, e.g., tablets and desktops */
   .selectedImage {
     max-width: 20px;
   }
 }
 
-/* Add styles for the options container */
 .options {
   text-align: center;
   margin-top: 20px;
 }
 
-/* Style for the buttons */
 .options button {
-  background-color: white; /* Blue background */
-  color: black;             /* White text */
-  border: none;             /* No border */
-  padding: 10px 15px;       /* Padding around text */
-  margin: 5px;              /* Margin around buttons */
-  border-radius: 5px;       /* Rounded corners */
-  cursor: pointer;          /* Pointer cursor on hover */
-  font-size: 0.8em;           /* Font size */
+  background-color: white; 
+  color: black;         
+  border: none;             
+  padding: 10px 15px;       
+  margin: 5px;            
+  border-radius: 5px;      
+  cursor: pointer;         
+  font-size: 0.8em;           
   font-family: monospace, monospace;
-  /* add shadow */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
 }
 
-/* Change background color on hover */
 .options button:hover {
-  background-color: lightgray; /* Darker blue background on hover */
+  background-color: lightgray;
 }

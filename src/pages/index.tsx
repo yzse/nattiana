@@ -83,7 +83,6 @@ export default function Home() {
     };
   }, [parsedData]);
 
-  // Refactored handleUserResponse
   const handleUserResponse = (response: string) => {
     setIsOptionSelected(true);
     setUserResponses(prevResponses => [...prevResponses, response]);
@@ -102,11 +101,11 @@ export default function Home() {
         setTimeout(() => {
           setShowInteraction3(true); 
         }, 1200);
-        setShowOptionsForInteraction3(true); // on top of the world! / let's not go there.
+        setShowOptionsForInteraction3(true); 
         break;
       case 3:
         setTimeout(() => {
-          setShowInteraction4(true); // Let's keep that between us.
+          setShowInteraction4(true); 
         }, 1200);
         break;
       default:
