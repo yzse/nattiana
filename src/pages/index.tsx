@@ -24,7 +24,28 @@ export default function Home() {
   const [userResponses, setUserResponses] = useState<string[]>([]);
   const [isOptionSelected, setIsOptionSelected] = useState(false);
   const [interactionStep, setInteractionStep] = useState(0);
+  const [showInteraction2, setShowInteraction2] = useState(false);
+  const [showInteraction3, setShowInteraction3] = useState(false);
+  const [showInteraction4, setShowInteraction4] = useState(false);
+  const [showInteraction5, setShowInteraction5] = useState(false);
+  const [showInteraction6, setShowInteraction6] = useState(false);
+  const [showInteraction7, setShowInteraction7] = useState(false);
+  const [showGuessMessage, setShowGuessMessage] = useState(false);
+  const [showBulletPoint, setShowBulletPoint] = useState(false);
+  const [showLine1, setShowLine1] = useState(false);
+  const [showLine2, setShowLine2] = useState(false);
+  const [showLine3, setShowLine3] = useState(false);
+  const [showLine4, setShowLine4] = useState(false);
+  const [showWine, setShowWine] = useState(false);
+  const [showOptionsForInteraction2, setShowOptionsForInteraction2] = useState(false);
+  const [showOptionsForInteraction3, setShowOptionsForInteraction3] = useState(false);
+  const [showOptionsForInteraction5, setShowOptionsForInteraction5] = useState(false);
 
+  const initialMessages = [
+    "Oh honey, let's see what you're pretending to enjoy tonight (or day, you freak)...",
+    "Analyzing your drink choice...",
+    "Judging silently..."
+  ];
 
   let readAndCompressImage: typeof readAndCompressImageType;
 
@@ -37,15 +58,9 @@ export default function Home() {
     }
   }, []);
 
-  // useEffect for message sequence
+  // useEffect for initial message sequence
   useEffect(() => {
-    if (!parsedData) return; // run only if parsedData is available
-
-    const initialMessages = [
-      "Oh honey, let's see what you're pretending to enjoy tonight (or day, you freak)...",
-      "Analyzing your drink choice...",
-      "Judging silently..."
-    ];
+    if (!parsedData) return;
 
     initialMessages.forEach((message, index) => {
       setTimeout(() => {
@@ -57,10 +72,10 @@ export default function Home() {
     
             setTimeout(() => {
               setShowOptions(true);
-            }, 1500);
-          }, 2800);
+            }, 2800);
+          }, 3000);
         }
-      }, 2800 * index);
+      }, 3000 * index);
     });
 
     return () => {
@@ -68,28 +83,83 @@ export default function Home() {
     };
   }, [parsedData]);
 
+  // Refactored handleUserResponse
   const handleUserResponse = (response: string) => {
-    setIsOptionSelected(true); 
+    setIsOptionSelected(true);
     setUserResponses(prevResponses => [...prevResponses, response]);
   
-    setTimeout(() => {
-      if (interactionStep === 0) {
-        setInteractionStep(1);
-        setTimeout(() => {
-          setShowOptions(true);
-          setIsOptionSelected(false);
-        }, 1000);
-      } else if (interactionStep === 1) {
-        setInteractionStep(2);
-        setTimeout(() => {
-          setShowOptions(true);
-          setIsOptionSelected(false);
-        }, 1000);
-      }
-    }, 3000); 
-  };
+    const nextStep = interactionStep + 1;
+    setInteractionStep(nextStep);
+   
+    switch (nextStep) {
+      case 1:
+        setShowInteraction2(true); // tell me, are you actually enjoying it or just trying to look cool?
+        setShowOptionsForInteraction2(true); // obsessed with it, actually. / just trying to be real.
+        break;
+      case 2:
+        setShowInteraction3(true); // So you’re a {parsedData?.category} person. Shocking. How's that working out for you?
+        setShowOptionsForInteraction3(true); // on top of the world! / let's not go there.
+        break;
+      case 3:
+        setShowInteraction4(true); // Let's keep that between us.
+        break;
+      default:
+        break;
+    }
   
+    setTimeout(() => {
+      setShowOptions(true);
+      setIsOptionSelected(false);
+    }, 3500);
+  };
 
+
+  useEffect(() => {
+    if (interactionStep === 3 && showInteraction4) {
+      setTimeout(() => {
+        setInteractionStep(4);
+        setShowInteraction5(true);
+      }, 3500);
+    }
+
+    // let me guess, you're into...
+    if (interactionStep === 4 && showInteraction5) {
+      setTimeout(() => {
+        setShowGuessMessage(true);
+        setShowInteraction6(true);
+      }, 4500);
+    
+      setTimeout(() => {
+        setShowBulletPoint(true);
+      }, 8000);
+
+      setTimeout(() => {
+        setShowOptionsForInteraction5(true);
+      }, 13000);
+    }
+
+    // historical fact
+    if (interactionStep === 5 && showInteraction6) {
+      setTimeout(() => {
+        setInteractionStep(6);
+        setShowInteraction7(true);
+      }, 4500);
+    }
+
+    // closing lines
+    const wait = 7000;
+    if (interactionStep === 6 && showInteraction7) {
+      setTimeout(() => setShowLine1(true), wait);
+      setTimeout(() => setShowLine2(true), wait+3500);
+      setTimeout(() => setShowLine3(true), wait+7000);
+      setTimeout(() => setShowLine4(true), wait+11000);
+      setTimeout(() => setShowWine(true), wait+12000);
+    }
+  }, [interactionStep, showInteraction4, showInteraction5, showInteraction6, showInteraction7]);
+
+
+
+  
   const config = {
     quality: 0.4,
     maxWidth: 800,
@@ -97,6 +167,8 @@ export default function Home() {
     autoRotate: true,
     debug: true,
   };
+
+  
 
   const showImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
@@ -187,7 +259,7 @@ export default function Home() {
         <h1 className={styles.title}>Nattiana.</h1>
         <h2 className={styles.description}>  </h2>
 
-        {!selectedImage && (
+        {!selectedImage ? (
           <div className={styles.grid}>
             <label htmlFor="capture" className="photo">
               <p>Scan drink label &rarr;</p>
@@ -202,7 +274,12 @@ export default function Home() {
               />
             </label>
           </div>
+        ) : (
+          <div className={styles.gridu}>
+            <p>That's what you're having?</p>
+          </div>
         )}
+
 
        {/* display user image */}
         <div className={styles.grid}>
@@ -221,7 +298,7 @@ export default function Home() {
           {isLoading && <div className={styles.loadingDot}></div>}
         </div>
 
-        {/* display initial messages */}
+        {/* initial sequence */}
         {messages.map((message, index) => (
           <div key={index} className={`${styles.typewriter} ${styles.monospace}`}>
             <p>{message}</p>
@@ -231,8 +308,8 @@ export default function Home() {
         {/* options for interaction 1 */}
         {showOptions && !isOptionSelected && interactionStep === 0 && (
           <div className={styles.options}>
-            <button onClick={() => handleUserResponse("yeah, that's my style")}>yeah, that's my style.</button>
-            <button onClick={() => handleUserResponse("no, it's something else")}>no, it's something else.</button>
+            <button onClick={() => handleUserResponse("yeah, that's my style")}>yeah, that's my style</button>
+            <button onClick={() => handleUserResponse("no, it's something else")}>no, it's something else</button>
           </div>
         )}
 
@@ -245,31 +322,140 @@ export default function Home() {
 
         {/* interaction 2 */}
         {/* check if user selected option for previous interaction*/}
-        {interactionStep >= 1 && (
+        {interactionStep >= 1 && showInteraction2 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            tell me, are you actually enjoying it or just trying to look cool?
+            Tell me, are you actually enjoying it or just trying to look cool?
           </div>
         )}
 
         {/* options for interaction 2 */}
-        {showOptions && !isOptionSelected && interactionStep === 1 && (
+        {interactionStep === 1 && !isOptionSelected && showInteraction2 && showOptionsForInteraction2 && (
             <div className={styles.options}>
-              <button onClick={() => handleUserResponse("obsessed with it, actually")}>obsessed with it, actually.</button>
-              <button onClick={() => handleUserResponse("just for the Instagram likes")}>just for the Instagram likes.</button>
+              <button onClick={() => handleUserResponse("obsessed with it, actually")}>obsessed with it, actually</button>
+              <button onClick={() => handleUserResponse("it's for the bereal")}>it's for the bereal</button>
             </div>
         )}
 
         {/* response 2 */}
-        {interactionStep > 1 && userResponses[1] && (
+        {interactionStep >= 1 && userResponses[1] && showInteraction2 && (
           <div className={`${styles.typewriterRes} ${styles.monospace}`}>
             <p>{userResponses[1]}</p>
           </div>
         )}
 
+        {/* interaction 3 */}
+        {interactionStep >= 2 && showInteraction3 && ( 
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            So you’re a {parsedData?.category} person. Shocking. How's that going for you?
+          </div>
+        )}
+
+        {/* options for interaction 3 */}
+        {interactionStep === 2 && !isOptionSelected && showInteraction3 && showOptionsForInteraction3 && (
+            <div className={styles.options}>
+              <button onClick={() => handleUserResponse("better than you'd think")}>better than you'd think</button>
+              <button onClick={() => handleUserResponse("let's not go there")}>let's not go there</button>
+            </div>
+        )}
+
+        {/* response 3 */}
+        {interactionStep >= 2 && userResponses[2] && showInteraction3 && (
+          <div className={`${styles.typewriterRes} ${styles.monospace}`}>
+            <p>{userResponses[2]}</p>
+          </div>
+        )}
+
+        {/* interaction 4 */}
+        {interactionStep >= 3 && showInteraction4 && ( 
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            Let's keep that between us.
+          </div>
+        )}
+
+        {/* interaction 5 */}
+        {interactionStep >= 3 && showInteraction4 && showInteraction5 &&  ( 
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            {parsedData?.comment}
+          </div>
+        )}
+
+        {showGuessMessage && (
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            Let me guess, you're into...
+          </div>
+        )}
+        
+        {showBulletPoint && (
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            - {parsedData?.bulletPoints[0]}
+            <br />
+            - {parsedData?.bulletPoints[1]}
+            <br />
+            - {parsedData?.bulletPoints[2]}
+          </div>
+        )}
+
+        {/* options for interaction 5 */}
+        {interactionStep === 4 && !isOptionSelected && showOptionsForInteraction5 && (
+            <div className={styles.options}>
+              <button onClick={() => handleUserResponse("whatever you say")}>whatever you say</button>
+              <button onClick={() => handleUserResponse("drag me more")}>drag me more</button>
+            </div>
+        )}
+
+        {/* response 5 */}
+        {interactionStep >= 4 && userResponses[3] && showInteraction5 && (
+          <div className={`${styles.typewriterRes} ${styles.monospace}`}>
+            <p>{userResponses[3]}</p>
+          </div>
+        )}
+
+        {/* interaction 6 */}
+        {interactionStep >= 4 && userResponses[3] && showInteraction6 && ( 
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            How about a cheeky tidbit so you can impress your friends other than your drink choice?
+          </div>
+        )}
+
+        {/* interaction 7 */}
+        {interactionStep >= 4 && userResponses[3] && showInteraction7 && ( 
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            - {parsedData?.historicalFact}
+          </div>
+        )}
+
+        {/* closing line 1 */}
+        {interactionStep >= 6 && showLine1 && ( 
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            Still staring at your phone with that {parsedData?.nameOfBeverage}? You good?
+          </div>
+        )}
+
+        {/* closing line 2 */}
+        {interactionStep >= 6 && showLine2 && ( 
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            Just kidding, I don't care. Good luck with that.
+          </div>
+        )}
+
+        {/* closing line 3 */}
+        {interactionStep >= 6 && showLine3 && ( 
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            I digress, off to judge other people's drink choices.
+          </div>
+        )}
+
+        {/* closing line 4 */}
+        {interactionStep >= 6 && showLine4 && ( 
+          <div className={`${styles.typewriter} ${styles.monospace}`}>
+            Enjoyed the banter? Come back anytime.
+          </div>
+        )}
 
         {/* wine emoji */}
-        {gptResponse && (
+        {gptResponse && showWine && (
         <div className={styles.description}>
+          <br />
           <img src="https://i.imgur.com/PTmtsWg.png" width="25" height="25"></img>
         </div>
         )}

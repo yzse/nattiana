@@ -103,6 +103,16 @@
   text-decoration: underline;
 }
 
+.gridu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+  font-size: 1rem;
+  font-family: 'New Yorker Italic', Arial, Helvetica, sans-serif;
+}
+
 
 @keyframes grow {
   0% { max-height: var(--lineHeight); }
@@ -127,8 +137,9 @@
 
 .typewriter {
   --bgColor: #f1efee;
+  /* --bgColor: ; */
   --lines: 500;
-  --lineHeight: 1.7rem;
+  --lineHeight: 2rem;
   --timePerLine: 1.25s;
   --widthCh: 40;
   --width: calc(var(--widthCh) * 1ch);
@@ -162,14 +173,14 @@
 
 .typewriterRes {
   --bgColor: #f1efee;
-  --lines: 500;
-  --lineHeight: 1.7rem;
-  --timePerLine: 1.25s;
+  /* --lines: 500; */
+  --lineHeight: 2rem;
+  /* --timePerLine: 1.25s; */
   --widthCh: 40;
   --width: calc(var(--widthCh) * 1ch);
-  --time: calc(var(--lines) * var(--timePerLine));
-  animation: grow var(--time) steps(var(--lines)) forwards;
-  animation-fill-mode: forwards;
+  /* --time: calc(var(--lines) * var(--timePerLine)); */
+  /* animation: grow var(--time) steps(var(--lines)) forwards;
+  animation-fill-mode: forwards; */
   background: var(--bgColor);  
   line-height: var(--lineHeight);
   max-height: var(--lineHeight);
@@ -178,32 +189,12 @@
   width: var(--width);
   text-align: right;
   font-size: 0.8rem;
-}
-
-.typewriterRes::before {
-  content: "";
-  animation: 
-    type var(--timePerLine) linear, 
-    carriageReturn var(--time) steps(var(--lines)) var(--lines);
-    /* caret 2.0s steps(5); */
-  background: var(--bgColor);
-  /* border-left: 10px solid; */
-  bottom: 0;
-  height: var(--lineHeight);
-  position: absolute;
-  right: 0;
-  width: var(--lineHeight);
+  /* bold */
+  font-weight: bold;
 }
 
 .typewriterRes.monospace {
   font-family: monospace, monospace;
-}
-
-.typewriterRes.monospace::before {
-  animation: 
-    type var(--timePerLine) steps(var(--widthCh)) infinite, 
-    carriageReturn var(--time) steps(var(--lines)) var(--lines);
-    /* caret 2.0s steps(5); */
 }
 
 
