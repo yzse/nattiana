@@ -453,7 +453,7 @@ export default function Home() {
         {/* closing line 4 */}
         {interactionStep >= 6 && showLine4 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            Enjoyed the banter? Come back anytime.
+            Enjoyed the banter? Come back once you find something more tasteful.
           </div>
         )}
 
