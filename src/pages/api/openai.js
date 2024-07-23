@@ -9,11 +9,11 @@ export default async function handler(req, res) {
         
         // api call
         const response = await openai.chat.completions.create({
-        model: "gpt-4-vision-preview",
+        model: "gpt-4o",
         messages: [
             {
             role: "system",
-            content: process.env.NEXT_PUBLIC_PROMPT_2,
+            content: process.env.NEXT_PUBLIC_PROMPT,
             },
             {
             role: "user",
