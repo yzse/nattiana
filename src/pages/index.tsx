@@ -281,7 +281,7 @@ export default function Home() {
           </div>
         ) : (
           <div className={styles.gridu}>
-            <p>That's what you're having?</p>
+            <p>That&apos;s what you&apos;re having?</p>
           </div>
         )}
 
@@ -313,8 +313,8 @@ export default function Home() {
         {/* options for interaction 1 */}
         {showOptions && !isOptionSelected && interactionStep === 0 && (
           <div className={styles.options}>
-            <button onClick={() => handleUserResponse("yeah, that's my style")}>yeah, that's my style</button>
-            <button onClick={() => handleUserResponse("no, it's something else")}>no, it's something else</button>
+            <button onClick={() => handleUserResponse("yeah, that&apos;s my style")}>yeah, that&apos;s my style</button>
+            <button onClick={() => handleUserResponse("no, it&apos;s something else")}>no, it&apos;s something else</button>
           </div>
         )}
 
@@ -337,7 +337,7 @@ export default function Home() {
         {interactionStep === 1 && !isOptionSelected && showInteraction2 && showOptionsForInteraction2 && (
             <div className={styles.options}>
               <button onClick={() => handleUserResponse("obsessed with it, actually")}>obsessed with it, actually</button>
-              <button onClick={() => handleUserResponse("it's for the bereal")}>it's for the bereal</button>
+              <button onClick={() => handleUserResponse("it&apos;s for the bereal")}>it&apos;s for the bereal</button>
             </div>
         )}
 
@@ -351,15 +351,15 @@ export default function Home() {
         {/* interaction 3 */}
         {interactionStep >= 2 && showInteraction3 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            So you’re a {parsedData?.category} person. Shocking. How's that going for you?
+            So you&apos;re a {parsedData?.category} person. Shocking. How&apos;s that going for you?
           </div>
         )}
 
         {/* options for interaction 3 */}
         {interactionStep === 2 && !isOptionSelected && showInteraction3 && showOptionsForInteraction3 && (
             <div className={styles.options}>
-              <button onClick={() => handleUserResponse("better than you'd think")}>better than you'd think</button>
-              <button onClick={() => handleUserResponse("let's not go there")}>let's not go there</button>
+              <button onClick={() => handleUserResponse("better than you&apos;d think")}>better than you&apos;d think</button>
+              <button onClick={() => handleUserResponse("let&apos;s not go there")}>let&apos;s not go there</button>
             </div>
         )}
 
@@ -373,7 +373,7 @@ export default function Home() {
         {/* interaction 4 */}
         {interactionStep >= 3 && showInteraction4 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            Let's keep that between us.
+            Let&apos;s keep that between us.
           </div>
         )}
 
@@ -386,7 +386,7 @@ export default function Home() {
 
         {showGuessMessage && (
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            Let me guess, you're into...
+            Let me guess, you&apos;re into...
           </div>
         )}
         
@@ -439,14 +439,14 @@ export default function Home() {
         {/* closing line 2 */}
         {interactionStep >= 6 && showLine2 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            Just kidding, I don't care. Good luck with that.
+            Just kidding, I don&apos;t care. Good luck with that.
           </div>
         )}
 
         {/* closing line 3 */}
         {interactionStep >= 6 && showLine3 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            I digress, off to judge other people's drink choices.
+            I digress, off to judge other people&apos;s drink choices.
           </div>
         )}
 
@@ -461,7 +461,7 @@ export default function Home() {
         {gptResponse && showWine && (
         <div className={styles.description}>
           <br />
-          <img src="https://i.imgur.com/PTmtsWg.png" width="25" height="25"></img>
+          <img src="https://i.imgur.com/PTmtsWg.png" width="25" height="25" alt="wine logo"></img>
         </div>
         )}
         
