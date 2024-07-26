@@ -8,7 +8,7 @@ interface ParsedResponse {
   category: string | undefined;
   comment: string | undefined;
   bulletPoints: string[];
-  historicalFact: string | undefined;
+  basicScore: string | undefined;
 }
 
 export default function Home() {
@@ -143,7 +143,7 @@ export default function Home() {
       }, 13000);
     }
 
-    // historical fact
+    // basicScore
     if (interactionStep === 5 && showInteraction6) {
       setTimeout(() => {
         setInteractionStep(6);
@@ -238,7 +238,7 @@ export default function Home() {
     const category = parts[1]?.substring(2).trim(); 
     const comment = parts[2]?.substring(2).trim(); 
     const bulletPointsRaw = parts[3]?.substring(2).trim(); 
-    const historicalFact = parts[4]?.substring(2).trim(); 
+    const basicScore = parts[4]?.substring(2).trim(); 
 
     // further split and process the bullet points
     const bulletPoints = bulletPointsRaw ? bulletPointsRaw.split(' - ').slice(1).map(point => point.trim()) : [];
@@ -248,7 +248,7 @@ export default function Home() {
         category,
         comment,
         bulletPoints,
-        historicalFact
+        basicScore
     };
   }
 
@@ -314,7 +314,7 @@ export default function Home() {
         {showOptions && !isOptionSelected && interactionStep === 0 && (
           <div className={styles.options}>
             <button onClick={() => handleUserResponse("yeah, that's my style")}>yeah, that&apos;s my style</button>
-            <button onClick={() => handleUserResponse("no, it&apos;s something else")}>no, it&apos;s something else</button>
+            <button onClick={() => handleUserResponse("no, it's something else")}>no, it&apos;s something else</button>
           </div>
         )}
 
@@ -337,7 +337,7 @@ export default function Home() {
         {interactionStep === 1 && !isOptionSelected && showInteraction2 && showOptionsForInteraction2 && (
             <div className={styles.options}>
               <button onClick={() => handleUserResponse("obsessed with it, actually")}>obsessed with it, actually</button>
-              <button onClick={() => handleUserResponse("it&apos;s for the bereal")}>it&apos;s for the bereal</button>
+              <button onClick={() => handleUserResponse("it's for the bereal")}>it&apos;s for the bereal</button>
             </div>
         )}
 
@@ -351,15 +351,15 @@ export default function Home() {
         {/* interaction 3 */}
         {interactionStep >= 2 && showInteraction3 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            So you&apos;re a {parsedData?.category} person. Shocking. How&apos;s that going for you?
+            So you're a {parsedData?.category} person. Shocking. How's that going for you?
           </div>
         )}
 
         {/* options for interaction 3 */}
         {interactionStep === 2 && !isOptionSelected && showInteraction3 && showOptionsForInteraction3 && (
             <div className={styles.options}>
-              <button onClick={() => handleUserResponse("better than you&apos;d think")}>better than you&apos;d think</button>
-              <button onClick={() => handleUserResponse("let&apos;s not go there")}>let&apos;s not go there</button>
+              <button onClick={() => handleUserResponse("better than you'd think")}>better than you&apos;d think</button>
+              <button onClick={() => handleUserResponse("let's not go there")}>let&apos;s not go there</button>
             </div>
         )}
 
@@ -373,7 +373,7 @@ export default function Home() {
         {/* interaction 4 */}
         {interactionStep >= 3 && showInteraction4 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            Let&apos;s keep that between us.
+            Let's keep that between us.
           </div>
         )}
 
@@ -386,7 +386,7 @@ export default function Home() {
 
         {showGuessMessage && (
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            Let me guess, you&apos;re into...
+            Let me guess, you're into...
           </div>
         )}
         
@@ -418,14 +418,14 @@ export default function Home() {
         {/* interaction 6 */}
         {interactionStep >= 4 && userResponses[3] && showInteraction6 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            How about a cheeky tidbit so you can impress your friends other than your drink choice?
+            Hope your parents are proud of you.
           </div>
         )}
 
         {/* interaction 7 */}
         {interactionStep >= 4 && userResponses[3] && showInteraction7 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            - {parsedData?.historicalFact}
+            - {parsedData?.basicScore}
           </div>
         )}
 
@@ -439,14 +439,14 @@ export default function Home() {
         {/* closing line 2 */}
         {interactionStep >= 6 && showLine2 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            Just kidding, I don&apos;t care. Good luck with that.
+            Just kidding, I don't care. Good luck with that.
           </div>
         )}
 
         {/* closing line 3 */}
         {interactionStep >= 6 && showLine3 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            I digress, off to judge other people&apos;s drink choices.
+            I digress, off to judge other people's drink choices.
           </div>
         )}
 
