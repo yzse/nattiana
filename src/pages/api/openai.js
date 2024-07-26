@@ -2,7 +2,7 @@ import OpenAI from 'openai';
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-        const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, dangerouslyAllowBrowser: true });
+        const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, dangerouslyAllowBrowser: true });
         const { image: imageUrl } = req.body;
 
         // initiate msg list
