@@ -313,7 +313,7 @@ export default function Home() {
         {/* options for interaction 1 */}
         {showOptions && !isOptionSelected && interactionStep === 0 && (
           <div className={styles.options}>
-            <button onClick={() => handleUserResponse("yeah, that&apos;s my style")}>yeah, that&apos;s my style</button>
+            <button onClick={() => handleUserResponse("yeah, that&apos;s my style")}>yeah, that's my style</button>
             <button onClick={() => handleUserResponse("no, it&apos;s something else")}>no, it&apos;s something else</button>
           </div>
         )}
