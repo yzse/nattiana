@@ -351,7 +351,7 @@ export default function Home() {
         {/* interaction 3 */}
         {interactionStep >= 2 && showInteraction3 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            So you're a {parsedData?.category} person. Shocking. How's that going for you?
+            So you&apos;re a {parsedData?.category} person. Shocking. How&apos;s that going for you?
           </div>
         )}
 
@@ -373,7 +373,7 @@ export default function Home() {
         {/* interaction 4 */}
         {interactionStep >= 3 && showInteraction4 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            Let's keep that between us.
+            Let&apos;s keep that between us.
           </div>
         )}
 
@@ -386,7 +386,7 @@ export default function Home() {
 
         {showGuessMessage && (
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            Let me guess, you're into...
+            Let me guess, you&apos;re into...
           </div>
         )}
         
@@ -439,14 +439,14 @@ export default function Home() {
         {/* closing line 2 */}
         {interactionStep >= 6 && showLine2 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            Just kidding, I don't care. Good luck with that.
+            Just kidding, I don&apos;t care. Good luck with that.
           </div>
         )}
 
         {/* closing line 3 */}
         {interactionStep >= 6 && showLine3 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            I digress, off to judge other people's drink choices.
+            I digress, off to judge other people&apos;s drink choices.
           </div>
         )}
 
