@@ -3,10 +3,6 @@ import OpenAI from 'openai';
 export default async function handler(req, res) {
     if (req.method === 'POST') {
         const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, dangerouslyAllowBrowser: true });
-        // confirm that request was successful
-        if (!req.body) {
-            return res.status(400).json({ error: 'No request body' });
-        }
 
         const { image: imageUrl } = req.body;
 
