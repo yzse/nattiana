@@ -9,13 +9,11 @@ export const config = {
 };
 
 const s3 = new AWS.S3({
-  accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: "us-east-1",
   bucket_name: "nattiana"
 });
-
-
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
