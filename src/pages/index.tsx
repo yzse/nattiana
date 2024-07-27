@@ -140,7 +140,7 @@ export default function Home() {
 
       setTimeout(() => {
         setShowOptionsForInteraction5(true);
-      }, 13000);
+      }, 9000);
     }
 
     // basicScore
