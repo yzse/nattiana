@@ -50,6 +50,7 @@
   font-size: 3rem;
   font-family: Arial, Helvetica, sans-serif;
   font-family: 'New Yorker Bold', Arial, Helvetica, sans-serif;
+  color: black;
   overflow: hidden; 
   white-space: nowrap; 
   animation: typing_title 0.7s steps(50, end);
@@ -66,6 +67,7 @@
 .description {
   text-align: center;
   font-family: 'New Yorker Bold', Arial, Helvetica, sans-serif;
+  color: black;
   
 }
 
@@ -73,7 +75,7 @@
   margin: 1rem 0;
   line-height: 1.5;
   font-size: 1rem;
-  color: white;
+  color: black;
   font-family: 'New Yorker Regular', Arial, Helvetica, sans-serif;
 }
 
@@ -96,6 +98,7 @@
   font-size: 1rem;
   font-family: 'New Yorker Italic', Arial, Helvetica, sans-serif;
   text-decoration: underline;
+  color: black;
 }
 
 .gridu {
@@ -106,6 +109,7 @@
   max-width: 800px;
   font-size: 1rem;
   font-family: 'New Yorker Italic', Arial, Helvetica, sans-serif;
+  color: black;
 }
 
 
@@ -148,6 +152,7 @@
   width: var(--width);
   text-align: justify;
   font-size: 0.8rem;
+  color: black;
 }
 
 .typewriter::before {
@@ -162,6 +167,7 @@
   position: absolute;
   right: 0;
   width: var(--lineHeight);
+  color: black;
 }
 
 .typewriterRes {
@@ -178,15 +184,18 @@
   text-align: right;
   font-size: 0.8rem;
   font-weight: bold;
+  color: black;
 }
 
 .typewriterRes.monospace {
   font-family: monospace, monospace;
+  color: black;
 }
 
 
 .typewriter.monospace {
   font-family: monospace, monospace;
+  color: black;
 }
 
 .typewriter.monospace::before {
@@ -194,6 +203,7 @@
     type var(--timePerLine) steps(var(--widthCh)) infinite, 
     carriageReturn var(--time) steps(var(--lines)) var(--lines),
     caret 2.0s steps(5);
+    color: black;
 }
 
 
