@@ -138,9 +138,10 @@ export default function Home() {
         setShowBulletPoint(true);
       }, 7000);
 
+      // Delay showing options until after the bullet points are fully displayed
       setTimeout(() => {
         setShowOptionsForInteraction5(true);
-      }, 9000);
+      }, 12000);
     }
 
     // basicScore
@@ -156,8 +157,8 @@ export default function Home() {
     if (interactionStep === 6 && showInteraction7) {
       setTimeout(() => setShowLine1(true), wait);
       setTimeout(() => setShowLine2(true), wait+3500);
-      setTimeout(() => setShowLine3(true), wait+7000);
-      setTimeout(() => setShowLine4(true), wait+11000);
+      setTimeout(() => setShowLine3(true), wait+7500);
+      setTimeout(() => setShowLine4(true), wait+15000);
       setTimeout(() => setShowWine(true), wait+12000);
     }
   }, [interactionStep, showInteraction4, showInteraction5, showInteraction6, showInteraction7]);
@@ -241,7 +242,26 @@ export default function Home() {
     const basicScore = parts[4]?.substring(2).trim(); 
 
     // further split and process the bullet points
-    const bulletPoints = bulletPointsRaw ? bulletPointsRaw.split(' - ').slice(1).map(point => point.trim()) : [];
+    let bulletPoints: string | any[] = [];
+    if (bulletPointsRaw) {
+      // First try to split by the " - " pattern
+      bulletPoints = bulletPointsRaw.split(' - ').slice(1).map(point => point.trim());
+      
+      // If we don't get any bullet points or less than 3, try other delimiters
+      if (bulletPoints.length === 0 || bulletPoints.length < 3) {
+        // Try to extract bullet points by looking for patterns like "- point"
+        const bpMatches = bulletPointsRaw.match(/[-•]\s+(.*?)(?=[-•]|$)/g);
+        if (bpMatches && bpMatches.length > 0) {
+          bulletPoints = bpMatches.map(p => p.replace(/^[-•]\s+/, '').trim());
+        }
+      }
+      
+      // Ensure we have an array even if it's empty
+      bulletPoints = bulletPoints || [];
+      
+      // Log for debugging
+      console.log("Extracted bullet points:", bulletPoints);
+    }
 
     return {
         nameOfBeverage,
@@ -392,11 +412,18 @@ export default function Home() {
         
         {showBulletPoint && (
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            - {parsedData?.bulletPoints[0]}
-            <br />
-            - {parsedData?.bulletPoints[1]}
-            <br />
-            - {parsedData?.bulletPoints[2]}
+            {parsedData?.bulletPoints && parsedData.bulletPoints.length > 0 && (
+              <>
+                - {parsedData.bulletPoints[0]}
+                <br />
+                {parsedData.bulletPoints.length > 1 && (
+                  <>- {parsedData.bulletPoints[1]}<br /></>
+                )}
+                {parsedData.bulletPoints.length > 2 && (
+                  <>- {parsedData.bulletPoints[2]}</>
+                )}
+              </>
+            )}
           </div>
         )}
 
@@ -425,7 +452,7 @@ export default function Home() {
         {/* interaction 7 */}
         {interactionStep >= 4 && userResponses[3] && showInteraction7 && ( 
           <div className={`${styles.typewriter} ${styles.monospace}`}>
-            - {parsedData?.basicScore}
+            You are {parsedData?.basicScore} on the basic scale.
           </div>
         )}
 

@@ -17,10 +17,14 @@ const s3 = new AWS.S3({
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
+    // Check for required environment variables
+    if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+      return res.status(500).json({ error: 'AWS credentials missing. Set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.' });
+    }
+
     const form = new formidable.IncomingForm();
 
     form.parse(req, (err, fields, files) => {
-
       if (err) {
         return res.status(500).json({ error: 'Error parsing the files' });
       }
@@ -39,13 +43,12 @@ export default async function handler(req, res) {
       };
 
       s3.upload(params, function(s3Err, data) {
-
         if (s3Err) {
+            console.error("S3 Upload Error:", s3Err);
             return res.status(500).json({ error: 'Error uploading to S3' });
         }
 
         res.status(200).json({ url: data.Location });
-        
       });
     });
   } else {
